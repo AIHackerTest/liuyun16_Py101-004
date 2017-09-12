@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.center {
+
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+h1 {
+    color: Blue;
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    font-family: Georgia, "Times New Roman",
+               "LiSu", "隶书",
+               serif;
+}
+
+p {
+  font-weight: bold;
+  color: black;
+  font-family: Georgia, "Times New Roman",
+             "KaiTi", "楷体",
+             serif;
+}
+
+input {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 16px;
+}
+
+.button {
+    background-color: #D3D3D3;
+    border: none;
+    color: black;
+    padding: 15px 26px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    opacity: 0.8;
+    border-radius: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <form action="/" method="POST">
+
+      <h1>云天气</h1>
+      <input name="city" placeholder="请输入城市名"><br />
+      <button type="submit" name="btn" value="查询" class="button">查询</button>
+      <button type="submit" name="btn" value="历史" class="button">历史</button>
+      <button type="submit" name="btn" value="帮助" class="button">帮助</button>
+
+  </form>
+</div>
+
+<p>
+  {% if weather_result %}
+    <p style="text-align:center">
+      <br>城市：{{weather_result.get('城市')}}, 当前天气为：{{weather_result.get('当前天气')}}, {{weather_result.get('温度')}}，数据更新时间：{{weather_result.get('更新时间')}}</br>
+    </p>
+  {% endif %}
+
+{% if log_flag %}
+  <p style="text-align:center">
+    {% for x in log %}
+    <br>城市：{{x.get('城市')}},  当前天气为：{{x.get('当前天气')}},  {{x.get('温度')}}，数据更新时间：{{x.get('更新时间')}}</br>
+    {% endfor %}
+  </p>
+{% endif %}
+
+{% if help_get %}
+  <p style="text-align:center">
+    <br>输入城市名，查询该城市的天气；</br>
+    <br>点击帮助，获取帮助文档；</br>
+    <br>点击历史，获取查询历史。</br>
+  </p>
+{% endif %}
+
+</p>
+</body>
+</html>
